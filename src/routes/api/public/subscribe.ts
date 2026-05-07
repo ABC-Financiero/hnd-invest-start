@@ -8,10 +8,10 @@ const bodySchema = z.object({
 });
 
 // TODO: ajustá estos valores con tu cuenta Brevo
-const SENDER_EMAIL = "guia@abcfinanciero.com"; // debe estar verificado en Brevo
+const SENDER_EMAIL = "marketing@abcfinanciero.com";
 const SENDER_NAME = "ABC Financiero";
-const LIST_IDS: number[] = []; // ej. [2] — IDs de listas en Brevo donde guardar el contacto
-const GUIDE_URL = "https://example.com/guia.pdf"; // URL pública del PDF de la guía
+const LIST_IDS: number[] = [12];
+const GUIDE_URL = "https://drive.google.com/uc?export=download&id=1ZyzC09gZyrz2kdw9FU-E8b5AlFNJwCyp";
 
 // rate limit simple en memoria (best effort)
 const hits = new Map<string, number[]>();
