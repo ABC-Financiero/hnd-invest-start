@@ -60,8 +60,9 @@ export function EmailCaptureForm({
 
   return (
     <form onSubmit={onSubmit} className="w-full max-w-md" noValidate>
-      <div className="group relative rounded-full p-[1.5px] transition-all duration-300 [background:linear-gradient(135deg,oklch(0.22_0_0)_0%,oklch(0.18_0_0)_50%,oklch(0.78_0.18_152/0.35)_100%)] focus-within:[background:linear-gradient(135deg,oklch(0.78_0.18_152/0.6)_0%,oklch(0.78_0.18_152/0.3)_50%,oklch(0.78_0.18_152/0.8)_100%)] focus-within:shadow-[0_0_0_4px_oklch(0.78_0.18_152/0.12)]">
+      <div className="flowing-border rounded-full transition-shadow duration-300">
         <div className="flex flex-col gap-2 rounded-full bg-[oklch(0.08_0_0)] p-1.5 sm:flex-row sm:items-center sm:gap-0">
+
           <label htmlFor="email-cta" className="sr-only">
             Correo electrónico
           </label>
