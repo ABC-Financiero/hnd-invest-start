@@ -1,26 +1,50 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Hero } from "@/components/landing/Hero";
+import { Features } from "@/components/landing/Features";
+import { TrustData } from "@/components/landing/TrustData";
+import { Testimonials } from "@/components/landing/Testimonials";
+import { FAQ } from "@/components/landing/FAQ";
+import { Pricing } from "@/components/landing/Pricing";
+import { Footer } from "@/components/landing/Footer";
 
 export const Route = createFileRoute("/")({
   component: Index,
+  head: () => ({
+    meta: [
+      {
+        title:
+          "Guía de inversión desde Honduras — Bolsa de valores con Hapi",
+      },
+      {
+        name: "description",
+        content:
+          "Aprende a abrir tu cuenta de inversión vía Hapi e invertir en el S&P 500 desde Honduras. Sin experiencia, desde USD $10. Guía paso a paso en español.",
+      },
+      {
+        property: "og:title",
+        content: "Guía de inversión desde Honduras — Bolsa de valores con Hapi",
+      },
+      {
+        property: "og:description",
+        content:
+          "Abre tu cuenta de inversión vía Hapi e invierte en el S&P 500 desde Honduras. Paso a paso, en español, desde USD $10.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
-
 function Index() {
-  return <PlaceholderIndex />;
+  return (
+    <main className="min-h-screen bg-background text-foreground antialiased">
+      <Hero />
+      <Features />
+      <TrustData />
+      <Testimonials />
+      <FAQ />
+      <Pricing />
+      <Footer />
+    </main>
+  );
 }
