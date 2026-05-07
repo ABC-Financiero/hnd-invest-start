@@ -1,8 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "@tanstack/react-router";
 import { z } from "zod";
-
-const LOOPS_ENDPOINT =
-  "https://app.loops.so/api/newsletter-form/cmoug9pxo00600ixg71nnoyx7";
 
 const emailSchema = z
   .string()
@@ -10,7 +8,7 @@ const emailSchema = z
   .email({ message: "Correo no válido" })
   .max(255);
 
-type Status = "idle" | "loading" | "success" | "error";
+type Status = "idle" | "loading" | "error";
 
 export function EmailCaptureForm({
   ctaLabel = "Acceder a la guía",
@@ -19,6 +17,7 @@ export function EmailCaptureForm({
   ctaLabel?: string;
   variant?: "dark" | "outline";
 }) {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -34,27 +33,24 @@ export function EmailCaptureForm({
     }
     setStatus("loading");
     try {
-      const body = new URLSearchParams({ email: parsed.data });
-      const res = await fetch(LOOPS_ENDPOINT, {
+      const res = await fetch("/api/public/subscribe", {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: parsed.data }),
       });
-      if (!res.ok) throw new Error("Network error");
-      setStatus("success");
-      setEmail("");
-    } catch {
+      if (!res.ok) {
+        const data = (await res.json().catch(() => null)) as { error?: string } | null;
+        throw new Error(data?.error ?? "Error");
+      }
+      navigate({ to: "/gracias" });
+    } catch (err) {
       setStatus("error");
-      setErrorMsg("No pudimos enviar tu correo. Intentá de nuevo.");
+      setErrorMsg(
+        err instanceof Error && err.message
+          ? err.message
+          : "No pudimos enviar tu correo. Intentá de nuevo.",
+      );
     }
-  }
-
-  if (status === "success") {
-    return (
-      <div className="rounded-full border border-primary/40 bg-primary/10 px-6 py-4 text-center text-sm text-primary">
-        ¡Listo! Revisá tu correo para acceder a la guía.
-      </div>
-    );
   }
 
   const buttonClass =
@@ -63,30 +59,34 @@ export function EmailCaptureForm({
       : "rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background transition hover:bg-foreground/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-60";
 
   return (
-    <form
-      onSubmit={onSubmit}
-      className="flex w-full max-w-md flex-col gap-3 sm:flex-row"
-      noValidate
-    >
-      <label htmlFor="email-cta" className="sr-only">
-        Correo electrónico
-      </label>
-      <input
-        id="email-cta"
-        type="email"
-        required
-        autoComplete="email"
-        placeholder="tucorreo@ejemplo.com"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        className="min-w-0 flex-1 rounded-full border border-border bg-card px-5 py-3 text-sm text-foreground placeholder:text-muted-foreground focus-visible:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-        maxLength={255}
-      />
-      <button type="submit" disabled={status === "loading"} className={buttonClass}>
-        {status === "loading" ? "Enviando..." : ctaLabel}
-      </button>
+    <form onSubmit={onSubmit} className="w-full max-w-md" noValidate>
+      <div className="group relative rounded-full p-[1.5px] transition-all duration-300 [background:linear-gradient(135deg,oklch(0.22_0_0)_0%,oklch(0.18_0_0)_50%,oklch(0.78_0.18_152/0.35)_100%)] focus-within:[background:linear-gradient(135deg,oklch(0.78_0.18_152/0.6)_0%,oklch(0.78_0.18_152/0.3)_50%,oklch(0.78_0.18_152/0.8)_100%)] focus-within:shadow-[0_0_0_4px_oklch(0.78_0.18_152/0.12)]">
+        <div className="flex flex-col gap-2 rounded-full bg-[oklch(0.08_0_0)] p-1.5 sm:flex-row sm:items-center sm:gap-0">
+          <label htmlFor="email-cta" className="sr-only">
+            Correo electrónico
+          </label>
+          <input
+            id="email-cta"
+            type="email"
+            required
+            autoComplete="email"
+            placeholder="tucorreo@ejemplo.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="min-w-0 flex-1 rounded-full bg-transparent px-5 py-3 text-sm text-foreground placeholder:text-muted-foreground/80 focus:outline-none"
+            maxLength={255}
+          />
+          <button
+            type="submit"
+            disabled={status === "loading"}
+            className={buttonClass}
+          >
+            {status === "loading" ? "Enviando..." : ctaLabel}
+          </button>
+        </div>
+      </div>
       {status === "error" && errorMsg && (
-        <p className="w-full text-xs text-destructive sm:basis-full">{errorMsg}</p>
+        <p className="mt-3 text-center text-xs text-destructive">{errorMsg}</p>
       )}
     </form>
   );
