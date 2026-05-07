@@ -1,73 +1,52 @@
-## Landing Page — Guía de Inversión Honduras
+## Plan
 
-Single-page mobile-first, premium sobrio, fondo negro con acento verde. Captura de email vía Loops + venta de curso $27.
+### 1. Input de email más notable (Hero + Footer)
 
-### Estructura de archivos
+`src/components/landing/EmailCaptureForm.tsx`:
+- Envolver el `<input>` en un wrapper con borde gradiente sutil (verde acento → border) usando un pseudo-elemento o `padding: 1px` + `background: linear-gradient(...)`.
+- Subir contraste del input: fondo `#0F0F0F` (más visible sobre `#000`) en lugar de `var(--card)`. Borde interior `#262626`. En `:focus-within`, el gradiente se intensifica (verde más saturado) y aparece un glow exterior `box-shadow: 0 0 0 4px rgba(0,210,106,0.12)`.
+- Placeholder un poco más claro para legibilidad.
+- Mantener layout actual (input + botón pill al lado en sm+, apilados en mobile).
 
-- `src/routes/index.tsx` — reemplaza el placeholder, compone todas las secciones
-- `src/styles.css` — añadir tokens del design system (negro, verde acento, card, stroke)
-- `src/components/landing/Hero.tsx`
-- `src/components/landing/Features.tsx`
-- `src/components/landing/TrustData.tsx` (gráfico S&P 500 + stats)
-- `src/components/landing/Testimonials.tsx`
-- `src/components/landing/FAQ.tsx` (usa `components/ui/accordion`)
-- `src/components/landing/Pricing.tsx` (card invertida blanca)
-- `src/components/landing/Footer.tsx`
-- `src/components/landing/EmailCaptureForm.tsx` (POST a Loops, reusable, validación zod)
+Tokens nuevos en `src/styles.css` si hace falta: `--input-surface`, `--gradient-input`.
 
-### Design system (src/styles.css)
+### 2. Integración Brevo (reemplaza Loops)
 
-Sobrescribir tokens en `:root` para forzar tema oscuro de la landing (la página completa usa modo dark fijo, no toggle):
+Lovable tiene conector oficial de Brevo (gateway). Flujo:
 
-- `--background: oklch(0 0 0)` (#000)
-- `--foreground: oklch(1 0 0)` (#FFF)
-- `--muted-foreground: oklch(0.7 0 0)` (#A0A0A0)
-- `--card: oklch(0.04 0 0)` (#0A0A0A)
-- `--border: oklch(0.18 0 0)` (#1F1F1F)
-- `--primary: oklch(0.78 0.18 152)` (≈ #00D26A verde acento)
-- Radius card 24px, pricing 32px, button pill (rounded-full)
+1. Conectar Brevo vía `standard_connectors--connect` (el usuario elige cuenta y autoriza). Esto inyecta `BREVO_API_KEY` y `LOVABLE_API_KEY` como env vars del runtime servidor.
+2. Crear server route público `src/routes/api/public/subscribe.ts` (TanStack Start, POST):
+   - Valida `email` con zod.
+   - Rate limit básico in-memory (defensivo).
+   - Llama al gateway Brevo:
+     - `POST https://connector-gateway.lovable.dev/brevo/contacts` para crear/actualizar contacto (con `listIds` configurable y `updateEnabled: true`).
+     - `POST https://connector-gateway.lovable.dev/brevo/smtp/email` para enviar el correo con la guía (asunto + HTML con botón/enlace de descarga, o el contenido de la guía embebido). Sender: dominio que el usuario verifique en Brevo (placeholder en código + comentario claro).
+   - Devuelve `{ ok: true }` o error con status apropiado.
+3. `EmailCaptureForm.tsx`: cambiar `fetch` para hacer `POST /api/public/subscribe` con JSON `{ email }`. En éxito, redirigir con `useNavigate()` a `/gracias`.
 
-Tipografía Inter / Inter Display vía Google Fonts en `__root.tsx` head links. Tracking -0.02em en titulares.
+**Decisiones que requieren input del usuario** (preguntaré antes de implementar):
+- ID(s) de lista en Brevo donde guardar el contacto (o crear uno nuevo).
+- Email remitente verificado en Brevo (`from`) y nombre del remitente.
+- Contenido del correo: ¿enlace de descarga (PDF en URL pública) o HTML con la guía? Si es PDF, necesito la URL.
 
-### Secciones (resumen)
+### 3. Página de gracias
 
-1. **Hero**: pill, H1 800/56-36px, sub gris, form email inline (input + botón "Acceder a la guía"), microcopy. Sin imagen.
-2. **Features**: grid 3-col desktop / stack mobile. Iconos lucide-react finos (line, no fill).
-3. **Trust/Data**: gráfico de línea con `recharts` (ya en deps si no, agregar) — datos S&P 500 anuales 1995-2025 hardcoded. 4 stats abajo.
-4. **Testimoniales**: 3 cards verticales, comilla verde pequeña.
-5. **FAQ**: shadcn Accordion, 8 items, separador inferior.
-6. **Pricing**: card blanca invertida centrada, max-w 480px, CTA negro pill.
-7. **Footer**: H 48px, CTA outline, nav, redes, disclaimer, copyright.
+Nueva ruta `src/routes/gracias.tsx`:
+- Mismo tema oscuro/tipografía/container que la landing.
+- Contenido sobrio: ✓ verde, H1 "Listo, revisá tu correo", párrafo "Te enviamos la guía a tu correo. Si no la ves en unos minutos, revisá la carpeta de spam.", botón secundario "Volver al inicio" → `/`.
+- SEO: `noindex` (no queremos que esta página rankee), title "Gracias — ABC Financiero".
 
-Container global `max-w-[720px] mx-auto px-6` para todas las secciones excepto donde indique grid más ancho. Padding vertical sección: `py-20 md:py-[120px]`.
+### Archivos afectados
 
-### Captura de email (Loops)
+- `src/components/landing/EmailCaptureForm.tsx` — nuevo estilo input + redirect a /gracias + nuevo endpoint.
+- `src/styles.css` — tokens del input si aplica.
+- `src/routes/api/public/subscribe.ts` — nuevo, server route Brevo.
+- `src/routes/gracias.tsx` — nueva página.
 
-`EmailCaptureForm.tsx`:
-- Validación zod (email válido, max 255).
-- POST `application/x-www-form-urlencoded` a `https://app.loops.so/api/newsletter-form/cmoug9pxo00600ixg71nnoyx7` con campo `email`.
-- Estados: idle, loading, success (mostrar "¡Listo, revisa tu correo!"), error (toast).
-- Sin logging del email a consola.
+### Fuera de alcance
+- Diseño/maquetación del PDF de la guía.
+- Verificación del dominio remitente en Brevo (lo hace el usuario en su cuenta Brevo).
 
-### Pricing CTA
+---
 
-Botón "Acceso al sistema" — placeholder `href="#"` por ahora (no se especificó procesador de pago). Lo dejo anclado al form de email o como `<a>` inerte; confirmar en una pregunta abajo si es necesario.
-
-### SEO (head en index.tsx)
-
-- title: "Guía de inversión desde Honduras — Bolsa de valores con Hapi"
-- description: ~155 chars sobre invertir en S&P 500 desde Honduras, sin experiencia, desde $10
-- og:title, og:description, twitter:card
-
-### Técnico
-
-- Mobile-first desde 380px, breakpoints sm/md/lg de Tailwind.
-- Focus states visibles (`focus-visible:ring-2 ring-primary ring-offset-2 ring-offset-background`).
-- Contraste verificado: blanco/negro 21:1, gris #A0A0A0/negro ≈ 9:1, verde/negro ≈ 7:1.
-- Sin nav fija, sin animaciones decorativas, sin gradientes.
-- Recharts: si no está instalado, `bun add recharts` antes de escribir el import.
-
-### Fuera de scope (a confirmar después si aplica)
-
-- Procesador de pago real para el botón de pricing ($27).
-- Handles reales de TikTok/Instagram, nombres de testimonios.
+Antes de implementar necesito confirmar 3 datos (lista Brevo, remitente verificado, contenido del correo). Te los pregunto en cuanto apruebes este plan.
