@@ -25,11 +25,6 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Validate Cloudflare secrets
-        run: |
-          test -n "${{ secrets.CLOUDFLARE_API_TOKEN }}" || (echo "Missing CLOUDFLARE_API_TOKEN secret" && exit 1)
-          test -n "${{ secrets.CLOUDFLARE_ACCOUNT_ID }}" || (echo "Missing CLOUDFLARE_ACCOUNT_ID secret" && exit 1)
-
       - name: Deploy
         run: npx wrangler deploy
         env:
