@@ -52,21 +52,33 @@ const faqs = [
 export function FAQ() {
   return (
     <section className="px-6 py-20 md:py-[120px]">
-      <div className="mx-auto max-w-[720px]">
+      <div className="mx-auto max-w-[760px]">
         <h2 className="text-center text-[32px] font-extrabold leading-tight tracking-[-0.02em] text-foreground sm:text-[40px] md:text-[48px]">
-          Preguntas honestas, respuestas honestas
+          Preguntas frecuentes antes de empezar
         </h2>
-        <Accordion type="single" collapsible className="mt-12 w-full">
+        <p className="mx-auto mt-4 max-w-[600px] text-center text-base text-muted-foreground sm:text-lg">
+          Estas son algunas dudas comunes que tienen muchos hondureños antes de invertir por primera vez.
+        </p>
+        <Accordion type="single" collapsible className="mt-12 flex w-full flex-col gap-3">
           {faqs.map((f, i) => (
             <AccordionItem
               key={i}
               value={`item-${i}`}
-              className="border-b border-border"
+              className="overflow-hidden rounded-2xl border border-border bg-card/40 transition-colors data-[state=open]:bg-card/70"
             >
-              <AccordionTrigger className="py-6 text-left text-base font-semibold text-foreground hover:no-underline sm:text-lg">
-                {f.q}
-              </AccordionTrigger>
-              <AccordionContent className="pb-6 text-sm leading-relaxed text-muted-foreground sm:text-base">
+              <AccordionPrimitive.Header className="flex">
+                <AccordionPrimitive.Trigger
+                  className={cn(
+                    "group flex flex-1 items-center justify-between gap-4 px-5 py-5 text-left text-base font-semibold text-foreground transition-colors hover:bg-card/60 sm:px-6 sm:text-lg",
+                  )}
+                >
+                  <span>{f.q}</span>
+                  <span className="relative flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors group-hover:text-foreground group-data-[state=open]:border-primary group-data-[state=open]:text-primary">
+                    <Plus className="h-4 w-4 transition-transform duration-300 group-data-[state=open]:rotate-45" />
+                  </span>
+                </AccordionPrimitive.Trigger>
+              </AccordionPrimitive.Header>
+              <AccordionContent className="px-5 pb-5 text-sm leading-relaxed text-muted-foreground sm:px-6 sm:pb-6 sm:text-base">
                 {f.a}
               </AccordionContent>
             </AccordionItem>
