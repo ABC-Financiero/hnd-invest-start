@@ -1,8 +1,9 @@
+import * as AccordionPrimitive from "@radix-ui/react-accordion";
+import { Plus } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
-  AccordionTrigger,
 } from "@/components/ui/accordion";
 
 const faqs = [
