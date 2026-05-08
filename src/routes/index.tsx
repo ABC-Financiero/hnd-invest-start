@@ -5,7 +5,7 @@ import { Features } from "@/components/landing/Features";
 import { TrustData } from "@/components/landing/TrustData";
 import { Testimonials } from "@/components/landing/Testimonials";
 import { FAQ } from "@/components/landing/FAQ";
-import { Pricing } from "@/components/landing/Pricing";
+import { Disclaimer } from "@/components/landing/Disclaimer";
 import { Footer } from "@/components/landing/Footer";
 
 export const Route = createFileRoute("/")({
@@ -45,7 +45,7 @@ function Index() {
       <VideoSection />
       <Testimonials />
       <FAQ />
-      <Pricing />
+      <Disclaimer />
       <Footer />
     </main>
   );
