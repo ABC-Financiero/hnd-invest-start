@@ -8,16 +8,17 @@ export function VideoSection() {
           Antes de descargar la guía, mira esto
         </h2>
 
-        <div className="mt-8 w-full overflow-hidden rounded-3xl border border-border bg-card shadow-[0_20px_60px_-20px_oklch(0_0_0/0.6)]">
-          <div className="relative w-full" style={{ paddingTop: "56.25%" }}>
+        <div className="mt-8 w-full max-w-[360px] overflow-hidden rounded-3xl border border-border bg-card shadow-[0_20px_60px_-20px_oklch(0_0_0/0.6)]">
+          <div className="relative w-full" style={{ paddingTop: "177.78%" }}>
             <iframe
-              src="https://player.vimeo.com/video/1190308774?badge=0&autopause=0&player_id=0&app_id=58479&muted=1&loop=1"
+              src="https://www.youtube.com/embed/A7MUeu2H2Q8?autoplay=1&mute=1&loop=1&playlist=A7MUeu2H2Q8&controls=1&playsinline=1&rel=0&modestbranding=1"
               className="absolute inset-0 h-full w-full"
               frameBorder={0}
-              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerPolicy="strict-origin-when-cross-origin"
               title="Presentación de la guía"
               loading="lazy"
+              allowFullScreen
             />
           </div>
         </div>
