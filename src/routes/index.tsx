@@ -40,9 +40,9 @@ function Index() {
   return (
     <main className="min-h-screen bg-background text-foreground antialiased">
       <Hero />
-      <VideoSection />
       <Features />
       <TrustData />
+      <VideoSection />
       <Testimonials />
       <FAQ />
       <Pricing />
