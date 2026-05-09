@@ -26,9 +26,11 @@ function rateLimit(key: string, limit = 5, windowMs = 60_000) {
 async function brevo(path: string, body: unknown) {
   // BREVO_API_KEY is always required; LOVABLE_API_KEY only enables gateway routing.
   const BREVO_API_KEY = process.env.BREVO_API_KEY;
-  if (!BREVO_API_KEY) throw new Error("BREVO_API_KEY missing");
+  if (!BREVO_API_KEY) {
+    throw new Error("BREVO_API_KEY environment variable is required but not configured");
+  }
   const LOVABLE_API_KEY = process.env.LOVABLE_API_KEY;
-  const useGateway = Boolean(LOVABLE_API_KEY);
+  const useGateway = !!LOVABLE_API_KEY;
   return fetch(useGateway ? `${GATEWAY_URL}${path}` : `${BREVO_API_BASE_URL}${path}`, {
     method: "POST",
     headers: {
