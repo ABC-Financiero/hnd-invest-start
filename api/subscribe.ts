@@ -10,6 +10,21 @@ const LIST_IDS: number[] = [12];
 const GUIDE_URL =
   "https://drive.google.com/uc?export=download&id=1ZyzC09gZyrz2kdw9FU-E8b5AlFNJwCyp";
 
+class BrevoConfigError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "BrevoConfigError";
+  }
+}
+
+class BrevoNetworkError extends Error {
+  constructor(cause?: unknown) {
+    super("BREVO_NETWORK_ERROR");
+    this.name = "BrevoNetworkError";
+    if (cause) console.error("Brevo network failure", cause);
+  }
+}
+
 const bodySchema = z.object({
   email: z.string().trim().email().max(255),
 });
@@ -31,7 +46,7 @@ async function brevo(path: string, body: unknown) {
   // BREVO_API_KEY is always required; LOVABLE_API_KEY only enables gateway routing.
   const BREVO_API_KEY = process.env.BREVO_API_KEY;
   if (!BREVO_API_KEY) {
-    throw new Error("BREVO_API_KEY environment variable is required but not configured");
+    throw new BrevoConfigError("BREVO_API_KEY environment variable is required but not configured");
   }
   const LOVABLE_API_KEY = process.env.LOVABLE_API_KEY;
   const useGateway = !!LOVABLE_API_KEY;
@@ -52,8 +67,8 @@ async function brevo(path: string, body: unknown) {
       },
       body: JSON.stringify(body),
     });
-  } catch {
-    throw new Error("BREVO_NETWORK_ERROR");
+  } catch (err) {
+    throw new BrevoNetworkError(err);
   }
 }
 
@@ -144,11 +159,10 @@ export default async function handler(req: VercelReq, res: VercelRes) {
 
     return res.status(200).json({ ok: true });
   } catch (err) {
-    const message = err instanceof Error ? err.message : "";
-    if (message === "BREVO_NETWORK_ERROR") {
+    if (err instanceof BrevoNetworkError) {
       return res.status(502).json({ error: "Servicio de correo temporalmente no disponible" });
     }
-    if (message.includes("BREVO_API_KEY environment variable")) {
+    if (err instanceof BrevoConfigError) {
       return res.status(503).json({ error: "Servicio de correo no configurado" });
     }
     console.error("subscribe error", err);
