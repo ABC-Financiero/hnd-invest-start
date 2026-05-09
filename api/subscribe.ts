@@ -21,7 +21,15 @@ class BrevoNetworkError extends Error {
   constructor(cause?: unknown) {
     super("BREVO_NETWORK_ERROR");
     this.name = "BrevoNetworkError";
-    if (cause) console.error("Brevo network failure", cause);
+    if (cause instanceof Error) {
+      console.error("Brevo network failure", {
+        name: cause.name,
+        message: cause.message,
+        stack: cause.stack,
+      });
+    } else if (cause) {
+      console.error("Brevo network failure", { cause });
+    }
   }
 }
 
@@ -61,7 +69,7 @@ async function brevo(path: string, body: unknown) {
               "X-Connection-Api-Key": BREVO_API_KEY,
             }
           : {
-              "api-key": BREVO_API_KEY,
+              "Api-Key": BREVO_API_KEY,
               Accept: "application/json",
             }),
       },
