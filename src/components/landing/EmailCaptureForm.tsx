@@ -42,7 +42,7 @@ export function EmailCaptureForm({
         const data = (await res.json().catch(() => null)) as { error?: string } | null;
         throw new Error(data?.error ?? "Error");
       }
-      navigate({ to: "/gracias" });
+      navigate("/gracias");
     } catch (err) {
       setStatus("error");
       setErrorMsg(
