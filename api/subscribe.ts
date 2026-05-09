@@ -3,6 +3,7 @@
 import { z } from "zod";
 
 const GATEWAY_URL = "https://connector-gateway.lovable.dev/brevo";
+const BREVO_API_BASE_URL = "https://api.brevo.com/v3";
 const SENDER_EMAIL = "marketing@abcfinanciero.com";
 const SENDER_NAME = "ABC Financiero";
 const LIST_IDS: number[] = [12];
@@ -23,16 +24,23 @@ function rateLimit(key: string, limit = 5, windowMs = 60_000) {
 }
 
 async function brevo(path: string, body: unknown) {
-  const LOVABLE_API_KEY = process.env.LOVABLE_API_KEY;
   const BREVO_API_KEY = process.env.BREVO_API_KEY;
-  if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY missing");
   if (!BREVO_API_KEY) throw new Error("BREVO_API_KEY missing");
-  return fetch(`${GATEWAY_URL}${path}`, {
+  const LOVABLE_API_KEY = process.env.LOVABLE_API_KEY;
+  const useGateway = Boolean(LOVABLE_API_KEY);
+  return fetch(useGateway ? `${GATEWAY_URL}${path}` : `${BREVO_API_BASE_URL}${path}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${LOVABLE_API_KEY}`,
-      "X-Connection-Api-Key": BREVO_API_KEY,
+      ...(useGateway
+        ? {
+            Authorization: `Bearer ${LOVABLE_API_KEY}`,
+            "X-Connection-Api-Key": BREVO_API_KEY,
+          }
+        : {
+            "api-key": BREVO_API_KEY,
+            Accept: "application/json",
+          }),
     },
     body: JSON.stringify(body),
   });
