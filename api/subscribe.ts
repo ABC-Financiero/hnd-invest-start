@@ -23,6 +23,10 @@ function rateLimit(key: string, limit = 5, windowMs = 60_000) {
   return arr.length <= limit;
 }
 
+/**
+ * Sends POST requests to Brevo through Lovable gateway when LOVABLE_API_KEY exists,
+ * otherwise calls Brevo v3 directly using BREVO_API_KEY.
+ */
 async function brevo(path: string, body: unknown) {
   // BREVO_API_KEY is always required; LOVABLE_API_KEY only enables gateway routing.
   const BREVO_API_KEY = process.env.BREVO_API_KEY;
@@ -31,22 +35,26 @@ async function brevo(path: string, body: unknown) {
   }
   const LOVABLE_API_KEY = process.env.LOVABLE_API_KEY;
   const useGateway = !!LOVABLE_API_KEY;
-  return fetch(useGateway ? `${GATEWAY_URL}${path}` : `${BREVO_API_BASE_URL}${path}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      ...(useGateway
-        ? {
-            Authorization: `Bearer ${LOVABLE_API_KEY}`,
-            "X-Connection-Api-Key": BREVO_API_KEY,
-          }
-        : {
-            "api-key": BREVO_API_KEY,
-            Accept: "application/json",
-          }),
-    },
-    body: JSON.stringify(body),
-  });
+  try {
+    return await fetch(useGateway ? `${GATEWAY_URL}${path}` : `${BREVO_API_BASE_URL}${path}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        ...(useGateway
+          ? {
+              Authorization: `Bearer ${LOVABLE_API_KEY}`,
+              "X-Connection-Api-Key": BREVO_API_KEY,
+            }
+          : {
+              "api-key": BREVO_API_KEY,
+              Accept: "application/json",
+            }),
+      },
+      body: JSON.stringify(body),
+    });
+  } catch {
+    throw new Error("BREVO_NETWORK_ERROR");
+  }
 }
 
 function emailHtml() {
@@ -136,6 +144,13 @@ export default async function handler(req: VercelReq, res: VercelRes) {
 
     return res.status(200).json({ ok: true });
   } catch (err) {
+    const message = err instanceof Error ? err.message : "";
+    if (message === "BREVO_NETWORK_ERROR") {
+      return res.status(502).json({ error: "Servicio de correo temporalmente no disponible" });
+    }
+    if (message.includes("BREVO_API_KEY environment variable")) {
+      return res.status(503).json({ error: "Servicio de correo no configurado" });
+    }
     console.error("subscribe error", err);
     return res.status(500).json({ error: "Error interno" });
   }
