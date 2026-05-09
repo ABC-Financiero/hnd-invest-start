@@ -1,17 +1,19 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
+import { useEffect } from "react";
 import { Check } from "lucide-react";
 
-export const Route = createFileRoute("/gracias")({
-  component: Gracias,
-  head: () => ({
-    meta: [
-      { title: "Gracias — ABC Financiero" },
-      { name: "robots", content: "noindex,nofollow" },
-    ],
-  }),
-});
+export default function Gracias() {
+  useEffect(() => {
+    document.title = "Gracias — ABC Financiero";
+    let robots = document.querySelector('meta[name="robots"]');
+    if (!robots) {
+      robots = document.createElement("meta");
+      robots.setAttribute("name", "robots");
+      document.head.appendChild(robots);
+    }
+    robots.setAttribute("content", "noindex,nofollow");
+  }, []);
 
-function Gracias() {
   return (
     <main className="flex min-h-screen items-center justify-center bg-background px-6 py-20 text-foreground antialiased">
       <div className="mx-auto flex max-w-[520px] flex-col items-center text-center">

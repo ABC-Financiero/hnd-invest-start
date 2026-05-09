@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "@tanstack/react-router";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 
 const emailSchema = z
@@ -33,7 +33,7 @@ export function EmailCaptureForm({
     }
     setStatus("loading");
     try {
-      const res = await fetch("/api/public/subscribe", {
+      const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: parsed.data }),
@@ -42,7 +42,7 @@ export function EmailCaptureForm({
         const data = (await res.json().catch(() => null)) as { error?: string } | null;
         throw new Error(data?.error ?? "Error");
       }
-      navigate({ to: "/gracias" });
+      navigate("/gracias");
     } catch (err) {
       setStatus("error");
       setErrorMsg(
