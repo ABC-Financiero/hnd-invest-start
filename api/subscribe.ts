@@ -171,7 +171,7 @@ export default async function handler(req: VercelReq, res: VercelRes) {
       return res.status(502).json({ error: "Servicio de correo temporalmente no disponible" });
     }
     if (err instanceof BrevoConfigError) {
-      return res.status(503).json({ error: "Servicio de correo no configurado" });
+      return res.status(503).json({ error: "Servicio de correo temporalmente no disponible" });
     }
     console.error("subscribe error", err);
     return res.status(500).json({ error: "Error interno" });
