@@ -33,7 +33,7 @@ export function EmailCaptureForm({
     }
     setStatus("loading");
     try {
-      const res = await fetch("/api/public/subscribe", {
+      const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: parsed.data }),
