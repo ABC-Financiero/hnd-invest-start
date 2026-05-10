@@ -21,10 +21,10 @@ export default function Gracias() {
           <Check className="h-6 w-6 text-primary" strokeWidth={2.5} />
         </div>
         <h1 className="mt-8 text-[32px] font-extrabold leading-[1.1] tracking-[-0.02em] sm:text-[40px]">
-          Listo, revisá tu correo.
+          Listo, revisa tu correo.
         </h1>
         <p className="mt-5 text-base text-muted-foreground sm:text-lg">
-          Te enviamos la guía a tu correo. Si no la ves en unos minutos, revisá la carpeta de spam o promociones.
+          Te enviamos la guía a tu correo. Si no la ves en unos minutos, revisa la carpeta de spam o promociones.
         </p>
         <Link
           to="/"

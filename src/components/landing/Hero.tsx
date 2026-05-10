@@ -8,11 +8,11 @@ export function Hero() {
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
           Invierte en la bolsa de valores
         </span>
-        <h1 className="mt-8 text-[36px] font-extrabold leading-[1.05] tracking-[-0.02em] text-foreground sm:text-[48px] md:text-[56px]">
-          Pierde el miedo y empieza a poner tu dinero a trabajar por ti.
+        <h1 className="mt-8 text-[32px] font-extrabold leading-[1.08] tracking-[-0.02em] text-foreground sm:text-[44px] md:text-[52px]">
+          Aprende a dar tu primer paso en la bolsa de valores desde Honduras, con claridad y sin sentirte perdido.
         </h1>
-        <p className="mt-6 max-w-[520px] text-base text-muted-foreground sm:text-lg">
-          Sin mucho dinero. Sin ser experto. Sin estafas o aplicaciones raras.
+        <p className="mt-6 max-w-[560px] text-base text-muted-foreground sm:text-lg">
+          Descarga gratis una guía paso a paso para abrir tu cuenta de inversión, fondearla y hacer tu primera compra usando Hapi como ejemplo práctico.
         </p>
         <div className="mt-10 flex w-full justify-center">
           <EmailCaptureForm />

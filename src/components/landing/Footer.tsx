@@ -22,8 +22,8 @@ export function Footer() {
         </nav>
 
         <div className="mt-6 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
-          <a href="#" className="hover:text-foreground">TikTok @abcfinanciero</a>
-          <a href="#" className="hover:text-foreground">Instagram @abcfinanciero</a>
+          <a href="#" className="hover:text-foreground">TikTok @ricardoaraque</a>
+          <a href="#" className="hover:text-foreground">Instagram @ricardoaraquen</a>
         </div>
 
         <p className="mx-auto mt-10 max-w-[520px] text-xs leading-relaxed text-muted-foreground">

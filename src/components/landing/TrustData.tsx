@@ -114,8 +114,7 @@ export function TrustData() {
             </ResponsiveContainer>
           </div>
           <p className="mt-4 text-xs text-muted-foreground">
-            S&P 500 1995–2024. Drawdown −38% en 2008. Rentabilidad pasada, no
-            garantía futura.
+            S&P 500 1995–2024 · Datos actualizados hasta 2026. Drawdown −38% en 2008. Rentabilidad pasada, no garantía futura.
           </p>
         </div>
 
