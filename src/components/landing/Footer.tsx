@@ -8,7 +8,7 @@ export function Footer() {
           Empieza hoy lo que llevas años posponiendo.
         </h2>
         <div className="mt-10 flex justify-center">
-          <EmailCaptureForm ctaLabel="Quiero la guía gratis" variant="outline" />
+          <EmailCaptureForm />
         </div>
 
         <nav className="mt-16 flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm text-muted-foreground">
@@ -22,15 +22,25 @@ export function Footer() {
         </nav>
 
         <div className="mt-6 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
-          <a href="#" className="hover:text-foreground">TikTok @ricardoaraque</a>
-          <a href="#" className="hover:text-foreground">Instagram @ricardoaraquen</a>
+          <a
+            href="https://www.tiktok.com/@ricardoaraque"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-foreground"
+          >
+            TikTok @ricardoaraque
+          </a>
+          <a
+            href="https://www.instagram.com/ricardoaraquen"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-foreground"
+          >
+            Instagram @ricardoaraquen
+          </a>
         </div>
 
-        <p className="mx-auto mt-10 max-w-[520px] text-xs leading-relaxed text-muted-foreground">
-          Contenido educativo, no asesoría financiera. Toda inversión conlleva
-          riesgo.
-        </p>
-        <p className="mt-3 text-xs text-muted-foreground">
+        <p className="mt-10 text-xs text-muted-foreground">
           © 2026 ABC Financiero · Honduras, Tegucigalpa
         </p>
       </div>

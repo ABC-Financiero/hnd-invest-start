@@ -94,13 +94,13 @@ export function TrustData() {
                 />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: "oklch(0.04 0 0)",
-                    border: "1px solid oklch(0.22 0 0)",
+                    backgroundColor: "#fff",
+                    border: "1px solid rgba(0,0,0,0.08)",
                     borderRadius: 12,
                     fontSize: 12,
-                    color: "#fff",
+                    color: "#111",
                   }}
-                  labelStyle={{ color: "oklch(0.7 0 0)" }}
+                  labelStyle={{ color: "#555" }}
                   formatter={(v: number) => [v.toLocaleString(), "S&P 500"]}
                 />
                 <Area

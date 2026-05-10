@@ -23,7 +23,7 @@ export function VideoSection() {
 
         <a
           href="#footer-cta"
-          className="mt-10 inline-flex items-center justify-center rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground transition hover:bg-foreground hover:text-background"
+          className="mt-10 inline-flex items-center justify-center rounded-full bg-foreground px-7 py-3.5 text-sm font-semibold text-background shadow-[0_10px_30px_-12px_rgba(0,0,0,0.35)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-foreground/90 hover:shadow-[0_16px_40px_-14px_rgba(0,0,0,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
           Quiero la guía gratis
         </a>
