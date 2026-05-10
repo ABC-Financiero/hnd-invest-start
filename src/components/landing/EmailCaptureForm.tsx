@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 
@@ -11,8 +11,7 @@ const emailSchema = z
 type Status = "idle" | "loading" | "error";
 
 export function EmailCaptureForm({
-  ctaLabel = "Acceder a la guía",
-  variant = "dark",
+  ctaLabel = "Quiero la guía gratis",
 }: {
   ctaLabel?: string;
   variant?: "dark" | "outline";
@@ -21,6 +20,11 @@ export function EmailCaptureForm({
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  const isValid = useMemo(
+    () => emailSchema.safeParse(email).success,
+    [email],
+  );
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -48,20 +52,15 @@ export function EmailCaptureForm({
       setErrorMsg(
         err instanceof Error && err.message
           ? err.message
-          : "No pudimos enviar tu correo. Intentá de nuevo.",
+          : "No pudimos enviar tu correo. Intenta de nuevo.",
       );
     }
   }
 
-  const buttonClass =
-    variant === "outline"
-      ? "w-full sm:w-auto rounded-full border border-foreground bg-transparent px-6 py-3 text-sm font-semibold text-foreground transition hover:bg-foreground hover:text-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-60"
-      : "w-full sm:w-auto rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background transition hover:bg-foreground/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-60";
-
   return (
     <form onSubmit={onSubmit} className="w-full max-w-md" noValidate>
-      <div className="flowing-border rounded-3xl sm:rounded-full transition-shadow duration-300">
-        <div className="flex flex-col gap-2 rounded-3xl bg-[oklch(0.08_0_0)] p-2 sm:flex-row sm:items-center sm:gap-1 sm:rounded-full sm:p-1.5">
+      <div className="flowing-border rounded-3xl transition-shadow duration-300">
+        <div className="flex flex-col gap-2 rounded-3xl bg-card p-2">
           <label htmlFor="email-cta" className="sr-only">
             Correo electrónico
           </label>
@@ -72,17 +71,32 @@ export function EmailCaptureForm({
             autoComplete="email"
             placeholder="tucorreo@ejemplo.com"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full min-w-0 flex-1 rounded-full bg-transparent px-5 py-3 text-base text-foreground placeholder:text-muted-foreground/80 focus:outline-none sm:text-sm"
+            onChange={(e) => {
+              setEmail(e.target.value);
+              if (status === "error") setStatus("idle");
+            }}
+            className="w-full min-w-0 flex-1 rounded-2xl bg-transparent px-5 py-3 text-base text-foreground placeholder:text-muted-foreground focus:outline-none"
             maxLength={255}
           />
-          <button
-            type="submit"
-            disabled={status === "loading"}
-            className={buttonClass}
+
+          <div
+            className={`grid transition-all duration-300 ease-out ${
+              isValid
+                ? "grid-rows-[1fr] opacity-100"
+                : "grid-rows-[0fr] opacity-0"
+            }`}
+            aria-hidden={!isValid}
           >
-            {status === "loading" ? "Enviando..." : ctaLabel}
-          </button>
+            <div className="overflow-hidden">
+              <button
+                type="submit"
+                disabled={!isValid || status === "loading"}
+                className="w-full rounded-2xl bg-foreground px-6 py-3 text-sm font-semibold text-background transition hover:bg-foreground/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-60"
+              >
+                {status === "loading" ? "Enviando..." : ctaLabel}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
       {status === "error" && errorMsg && (
