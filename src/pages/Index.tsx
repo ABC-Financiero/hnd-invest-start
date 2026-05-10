@@ -16,8 +16,8 @@ export default function Index() {
       <VideoSection />
       <Testimonials />
       <FAQ />
-      <Disclaimer />
       <Footer />
+      <Disclaimer />
     </main>
   );
 }

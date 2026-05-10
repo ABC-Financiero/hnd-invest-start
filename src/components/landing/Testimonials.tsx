@@ -20,8 +20,7 @@ export function Testimonials() {
   const scrollBy = (dir: 1 | -1) => {
     const el = scrollerRef.current;
     if (!el) return;
-    const amount = el.clientWidth * 0.85 * dir;
-    el.scrollBy({ left: amount, behavior: "smooth" });
+    el.scrollBy({ left: el.clientWidth * 0.85 * dir, behavior: "smooth" });
   };
 
   return (
@@ -34,23 +33,23 @@ export function Testimonials() {
           Mensajes reales de personas que dieron el primer paso para entender mejor sus finanzas e inversiones.
         </p>
 
-        <div className="relative mt-12">
+        {/* Desktop: grid */}
+        <div className="mt-12 hidden grid-cols-2 gap-6 md:grid lg:grid-cols-3">
+          {items.map((it, i) => (
+            <TestimonialCard key={i} src={it.src} alt={it.alt} />
+          ))}
+        </div>
+
+        {/* Mobile/tablet: horizontal scroll carousel */}
+        <div className="relative mt-12 md:hidden">
           <div
             ref={scrollerRef}
-            className="flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="-mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-6 pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             {items.map((it, i) => (
-              <figure
-                key={i}
-                className="snap-center shrink-0 basis-[78%] overflow-hidden rounded-3xl border border-border bg-card shadow-[0_20px_60px_-30px_oklch(0_0_0/0.6)] sm:basis-[55%] md:basis-[38%] lg:basis-[30%]"
-              >
-                <img
-                  src={it.src}
-                  alt={it.alt}
-                  loading="lazy"
-                  className="h-auto w-full object-contain"
-                />
-              </figure>
+              <div key={i} className="snap-center shrink-0 basis-[82%]">
+                <TestimonialCard src={it.src} alt={it.alt} />
+              </div>
             ))}
           </div>
 
@@ -59,7 +58,7 @@ export function Testimonials() {
               type="button"
               onClick={() => scrollBy(-1)}
               aria-label="Anterior"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card text-foreground transition hover:bg-foreground hover:text-background"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card text-foreground shadow-sm transition hover:bg-foreground hover:text-background"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
@@ -67,7 +66,7 @@ export function Testimonials() {
               type="button"
               onClick={() => scrollBy(1)}
               aria-label="Siguiente"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card text-foreground transition hover:bg-foreground hover:text-background"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card text-foreground shadow-sm transition hover:bg-foreground hover:text-background"
             >
               <ChevronRight className="h-5 w-5" />
             </button>
@@ -75,5 +74,18 @@ export function Testimonials() {
         </div>
       </div>
     </section>
+  );
+}
+
+function TestimonialCard({ src, alt }: { src: string; alt: string }) {
+  return (
+    <figure className="flex h-[460px] items-center justify-center overflow-hidden rounded-3xl border border-border bg-card p-4 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.15)]">
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        className="max-h-full max-w-full object-contain"
+      />
+    </figure>
   );
 }
