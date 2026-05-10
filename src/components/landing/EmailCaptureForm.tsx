@@ -55,14 +55,13 @@ export function EmailCaptureForm({
 
   const buttonClass =
     variant === "outline"
-      ? "rounded-full border border-foreground bg-transparent px-6 py-3 text-sm font-semibold text-foreground transition hover:bg-foreground hover:text-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-60"
-      : "rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background transition hover:bg-foreground/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-60";
+      ? "w-full sm:w-auto rounded-full border border-foreground bg-transparent px-6 py-3 text-sm font-semibold text-foreground transition hover:bg-foreground hover:text-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-60"
+      : "w-full sm:w-auto rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background transition hover:bg-foreground/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-60";
 
   return (
     <form onSubmit={onSubmit} className="w-full max-w-md" noValidate>
-      <div className="flowing-border rounded-full transition-shadow duration-300">
-        <div className="flex flex-col gap-2 rounded-full bg-[oklch(0.08_0_0)] p-1.5 sm:flex-row sm:items-center sm:gap-0">
-
+      <div className="flowing-border rounded-3xl sm:rounded-full transition-shadow duration-300">
+        <div className="flex flex-col gap-2 rounded-3xl bg-[oklch(0.08_0_0)] p-2 sm:flex-row sm:items-center sm:gap-1 sm:rounded-full sm:p-1.5">
           <label htmlFor="email-cta" className="sr-only">
             Correo electrónico
           </label>
@@ -74,7 +73,7 @@ export function EmailCaptureForm({
             placeholder="tucorreo@ejemplo.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="min-w-0 flex-1 rounded-full bg-transparent px-5 py-3 text-sm text-foreground placeholder:text-muted-foreground/80 focus:outline-none"
+            className="w-full min-w-0 flex-1 rounded-full bg-transparent px-5 py-3 text-base text-foreground placeholder:text-muted-foreground/80 focus:outline-none sm:text-sm"
             maxLength={255}
           />
           <button

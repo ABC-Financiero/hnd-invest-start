@@ -1,5 +1,3 @@
-import { EmailCaptureForm } from "./EmailCaptureForm";
-
 export function VideoSection() {
   return (
     <section className="px-6 pb-20">
@@ -23,12 +21,12 @@ export function VideoSection() {
           </div>
         </div>
 
-        <div className="mt-10 flex w-full justify-center">
-          <EmailCaptureForm ctaLabel="Quiero la guía gratis" />
-        </div>
-        <p className="mt-4 text-xs text-muted-foreground">
-          Sin spam, cancela cuando quieras.
-        </p>
+        <a
+          href="#footer-cta"
+          className="mt-10 inline-flex items-center justify-center rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground transition hover:bg-foreground hover:text-background"
+        >
+          Quiero la guía gratis
+        </a>
       </div>
     </section>
   );
