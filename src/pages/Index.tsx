@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Hero } from "@/components/landing/Hero";
 import { VideoSection } from "@/components/landing/VideoSection";
 import { Features } from "@/components/landing/Features";
@@ -8,6 +9,12 @@ import { Disclaimer } from "@/components/landing/Disclaimer";
 import { Footer } from "@/components/landing/Footer";
 
 export default function Index() {
+  useEffect(() => {
+    document.title = "ABC Financiero - Inicia tu inversión desde Honduras";
+    const robots = document.querySelector('meta[name="robots"]');
+    if (robots) robots.setAttribute("content", "index,follow");
+  }, []);
+
   return (
     <main className="min-h-screen bg-background text-foreground antialiased">
       <Hero />
