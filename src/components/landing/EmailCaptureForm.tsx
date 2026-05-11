@@ -59,13 +59,10 @@ export function EmailCaptureForm({
 
   return (
     <form onSubmit={onSubmit} className="w-full max-w-md" noValidate>
-      <div className="flowing-border rounded-3xl transition-shadow duration-300">
-        <div className="flex flex-col gap-2 rounded-3xl bg-card p-2">
-          <label htmlFor="email-cta" className="sr-only">
-            Correo electrónico
-          </label>
+      {/* Mobile / stacked: input on top, button reveals below */}
+      <div className="sm:hidden">
+        <div className="flowing-border rounded-full">
           <input
-            id="email-cta"
             type="email"
             required
             autoComplete="email"
@@ -75,32 +72,71 @@ export function EmailCaptureForm({
               setEmail(e.target.value);
               if (status === "error") setStatus("idle");
             }}
-            className="w-full min-w-0 flex-1 rounded-2xl bg-transparent px-5 py-3 text-base text-foreground placeholder:text-muted-foreground focus:outline-none"
+            className="block w-full rounded-full bg-card px-5 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
             maxLength={255}
+            aria-label="Correo electrónico"
           />
+        </div>
+        <div
+          className={`grid transition-all duration-300 ease-out ${
+            isValid ? "mt-2 grid-rows-[1fr] opacity-100" : "mt-0 grid-rows-[0fr] opacity-0"
+          }`}
+          aria-hidden={!isValid}
+        >
+          <div className="overflow-hidden">
+            <button
+              type="submit"
+              disabled={!isValid || status === "loading"}
+              className="w-full rounded-full bg-foreground px-5 py-3 text-sm font-semibold text-background transition hover:bg-foreground/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-60"
+            >
+              {status === "loading" ? "Enviando..." : ctaLabel}
+            </button>
+          </div>
+        </div>
+      </div>
 
-          <div
-            className={`grid transition-all duration-300 ease-out ${
-              isValid
-                ? "grid-rows-[1fr] opacity-100"
-                : "grid-rows-[0fr] opacity-0"
-            }`}
-            aria-hidden={!isValid}
-          >
-            <div className="overflow-hidden">
-              <button
-                type="submit"
-                disabled={!isValid || status === "loading"}
-                className="w-full rounded-2xl bg-foreground px-6 py-3 text-sm font-semibold text-background transition hover:bg-foreground/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-60"
-              >
-                {status === "loading" ? "Enviando..." : ctaLabel}
-              </button>
+      {/* Desktop: inline pill, button slides in from the right */}
+      <div className="hidden sm:block">
+        <div className="flowing-border rounded-full">
+          <div className="flex items-center gap-1.5 rounded-full bg-card p-1.5">
+            <input
+              type="email"
+              required
+              autoComplete="email"
+              placeholder="tucorreo@ejemplo.com"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                if (status === "error") setStatus("idle");
+              }}
+              className="min-w-0 flex-1 rounded-full bg-transparent px-4 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
+              maxLength={255}
+              aria-label="Correo electrónico"
+            />
+            <div
+              className={`grid transition-all duration-300 ease-out ${
+                isValid
+                  ? "grid-cols-[1fr] opacity-100 translate-x-0"
+                  : "grid-cols-[0fr] opacity-0 translate-x-2"
+              }`}
+              aria-hidden={!isValid}
+            >
+              <div className="overflow-hidden">
+                <button
+                  type="submit"
+                  disabled={!isValid || status === "loading"}
+                  className="whitespace-nowrap rounded-full bg-foreground px-5 py-2 text-sm font-semibold text-background transition hover:bg-foreground/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-60"
+                >
+                  {status === "loading" ? "Enviando..." : ctaLabel}
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
       {status === "error" && errorMsg && (
-        <p className="mt-3 text-center text-xs text-destructive">{errorMsg}</p>
+        <p className="mt-2 text-center text-xs text-destructive">{errorMsg}</p>
       )}
     </form>
   );

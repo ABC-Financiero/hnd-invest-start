@@ -20,22 +20,22 @@ const items = [
 
 export function Features() {
   return (
-    <section className="px-6 py-20 md:py-[120px]">
-      <div className="mx-auto grid max-w-[1080px] gap-6 md:grid-cols-3">
+    <section className="px-6 py-16 md:py-24">
+      <div className="mx-auto grid max-w-[1080px] gap-5 md:grid-cols-3">
         {items.map(({ icon: Icon, title, body }) => (
           <div
             key={title}
-            className="rounded-3xl border border-border bg-card p-8"
+            className="rounded-2xl border border-border bg-card p-6"
           >
             <Icon
-              className="h-7 w-7 text-foreground"
-              strokeWidth={1.25}
+              className="h-6 w-6 text-primary"
+              strokeWidth={1.5}
               aria-hidden="true"
             />
-            <h3 className="mt-6 text-xl font-bold tracking-[-0.02em] text-foreground">
+            <h3 className="mt-5 text-lg font-bold tracking-[-0.02em] text-foreground">
               {title}
             </h3>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+            <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
               {body}
             </p>
           </div>
