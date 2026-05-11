@@ -48,9 +48,9 @@ const currency = (n: number) =>
 
 const stats = [
   { value: "+10%", label: "rendimiento anual promedio" },
-  { value: "Sin plan", label: "la mayoría abre cuenta pero nunca construye una estrategia" },
+  { value: "8x", label: "más patrimonio a 20 años vs. ahorro tradicional" },
   { value: "+1,000", label: "hondureños aprendiendo" },
-  { value: "$50", label: "mínimo para empezar" },
+  { value: "$10", label: "mínimo para empezar" },
 ];
 
 export function TrustData() {
