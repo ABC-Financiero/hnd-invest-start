@@ -1,10 +1,13 @@
 import { useEffect } from "react";
 import { Hero } from "@/components/landing/Hero";
-import { VideoSection } from "@/components/landing/VideoSection";
-import { Features } from "@/components/landing/Features";
+import { ChoosePath } from "@/components/landing/ChoosePath";
+import { ProgramaSection } from "@/components/landing/ProgramaSection";
+import { Results } from "@/components/landing/Results";
 import { TrustData } from "@/components/landing/TrustData";
+import { About } from "@/components/landing/About";
 import { Testimonials } from "@/components/landing/Testimonials";
 import { FAQ } from "@/components/landing/FAQ";
+import { FinalCTA } from "@/components/landing/FinalCTA";
 import { Disclaimer } from "@/components/landing/Disclaimer";
 import { Footer } from "@/components/landing/Footer";
 
@@ -18,11 +21,14 @@ export default function Index() {
   return (
     <main className="min-h-screen bg-background text-foreground antialiased">
       <Hero />
-      <Features />
+      <ChoosePath />
+      <ProgramaSection />
+      <Results />
       <TrustData />
-      <VideoSection />
+      <About />
       <Testimonials />
       <FAQ />
+      <FinalCTA />
       <Footer />
       <Disclaimer />
     </main>
