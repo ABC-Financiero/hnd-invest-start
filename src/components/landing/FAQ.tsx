@@ -22,7 +22,7 @@ const faqs = [
   },
   {
     q: "¿Qué pasa si no sé nada sobre inversiones?",
-    a: "Es completamente normal. La mayoría empieza desde cero. Esta guía fue creada justamente para ayudarte a entender el proceso paso a paso, de forma simple y aterrizada a Honduras.",
+    a: "Es completamente normal. La guía gratuita te muestra cómo abrir tu cuenta paso a paso. Los fundamentos para invertir con estrategia los cubrimos dentro del Programa Portafolio Funcional.",
   },
   {
     q: "¿Necesito ser experto para invertir?",
@@ -30,11 +30,11 @@ const faqs = [
   },
   {
     q: "¿Por qué usas Hapi como ejemplo?",
-    a: "Hapi es una de las opciones más simples y accesibles para personas en Latinoamérica que quieren empezar a invertir en bolsa desde su celular. Aun así, el contenido educativo de esta guía también puede ayudarte aunque uses otro broker.",
+    a: "Hapi es una de las opciones más simples y accesibles para personas en Latinoamérica que quieren empezar a invertir en bolsa desde su celular. Por eso la guía gratuita te muestra cómo abrir tu cuenta específicamente en Hapi.",
   },
   {
     q: "¿Esto garantiza que voy a ganar dinero?",
-    a: "No. Nadie puede garantizar ganancias en la bolsa de valores. El objetivo de esta guía es ayudarte a entender cómo empezar, reducir errores y aprender a invertir con más criterio.",
+    a: "No. Nadie puede garantizar ganancias en la bolsa de valores. El objetivo es ayudarte a empezar bien, reducir errores y aprender a invertir con más criterio.",
   },
   {
     q: "¿Qué pasa si el mercado cae?",
@@ -42,7 +42,7 @@ const faqs = [
   },
   {
     q: "¿Esto funciona para personas en Honduras?",
-    a: "Sí. Todo el contenido de esta guía fue pensado específicamente para hondureños que quieren empezar desde cero y entender cómo funciona el proceso de inversión desde Honduras.",
+    a: "Sí. Todo el contenido fue pensado específicamente para hondureños que quieren empezar desde cero y entender cómo abrir su cuenta e invertir desde Honduras.",
   },
   {
     q: "¿Qué hago después de abrir mi cuenta?",

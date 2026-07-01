@@ -21,14 +21,14 @@ export function ChoosePath() {
               Gratis
             </span>
             <h3 className="mt-5 text-xl font-bold tracking-[-0.02em] text-foreground sm:text-2xl">
-              Quiero empezar gratis
+              Quiero abrir mi cuenta
             </h3>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              Ideal para quienes aún tienen dudas sobre cómo funciona la bolsa de valores y quieren aprender los fundamentos antes de invertir.
+              Guía gratuita paso a paso para abrir tu primera cuenta de inversión desde Honduras usando Hapi. Ideal si todavía no tienes cuenta.
             </p>
             <a
               href="#guia-gratis"
-              className="mt-auto inline-flex w-full items-center justify-center gap-2 rounded-full border border-border bg-background/40 px-5 py-3 text-sm font-semibold text-foreground transition hover:bg-foreground hover:text-background sm:w-fit"
+              className="mt-auto inline-flex items-center justify-center gap-2 rounded-full border border-border bg-background/40 px-5 py-2.5 text-sm font-semibold text-foreground transition hover:bg-foreground hover:text-background w-fit"
             >
               <Download className="h-4 w-4" />
               Descargar guía
@@ -54,7 +54,7 @@ export function ChoosePath() {
               href={PROGRAMA_URL}
               target="_blank"
               rel="noopener"
-              className="group mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/90 sm:w-fit sm:text-base"
+              className="group mt-8 inline-flex w-fit items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/90"
             >
               Conocer el Programa
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />

@@ -22,6 +22,14 @@ export function Footer() {
           >
             Instagram @ricardoaraquen
           </a>
+          <a
+            href="https://wa.me/50487328488"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-foreground"
+          >
+            WhatsApp +504 8732 8488
+          </a>
         </div>
 
         <p className="mt-8 text-xs text-muted-foreground">
