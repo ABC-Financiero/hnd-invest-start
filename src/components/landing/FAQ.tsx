@@ -9,6 +9,18 @@ import { cn } from "@/lib/utils";
 
 const faqs = [
   {
+    q: "¿Me garantizas retornos?",
+    a: "No, y desconfía de quien lo haga. Te enseño a invertir con un sistema basado en datos históricos y diversificación, no en promesas.",
+  },
+  {
+    q: "¿Necesito mucho dinero para empezar?",
+    a: "No. El sistema está diseñado para empezar desde montos pequeños mensuales, en lempiras, desde Honduras.",
+  },
+  {
+    q: "¿Qué plataforma se usa?",
+    a: "Hapi, un broker disponible en Honduras. La guía gratuita te enseña a abrir tu cuenta paso a paso.",
+  },
+  {
     q: "¿La bolsa de valores es una estafa?",
     a: "No. La bolsa de valores es un mercado regulado donde millones de personas y empresas invierten todos los días. El problema no suele ser la bolsa, sino invertir sin estrategia, seguir consejos al azar o caer en promesas falsas de dinero rápido.",
   },
@@ -22,7 +34,7 @@ const faqs = [
   },
   {
     q: "¿Qué pasa si no sé nada sobre inversiones?",
-    a: "Es completamente normal. La guía gratuita te muestra cómo abrir tu cuenta paso a paso. Los fundamentos para invertir con estrategia los cubrimos dentro del Programa Portafolio Funcional.",
+    a: "Es completamente normal. La guía gratuita te muestra cómo abrir tu cuenta paso a paso. Los fundamentos para invertir con estrategia los cubrimos dentro del Programa de Portafolio Funcional.",
   },
   {
     q: "¿Necesito ser experto para invertir?",
