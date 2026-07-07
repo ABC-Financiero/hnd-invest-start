@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { PROGRAMA_URL } from "@/lib/links";
 import { EmailCaptureForm } from "./EmailCaptureForm";
+import { trackClick } from "@/lib/track";
 
 export function FinalCTA() {
   return (
@@ -10,7 +11,7 @@ export function FinalCTA() {
           Da el siguiente paso hoy.
         </h2>
         <p className="mx-auto mt-4 max-w-[560px] text-[15px] text-muted-foreground sm:text-base">
-          Empieza con el sistema completo o abre tu cuenta de inversión con la guía gratuita.
+          Empieza con el Programa de Portafolio Funcional o abre tu cuenta de inversión con la guía gratuita.
         </p>
 
         <div className="mt-9 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
@@ -18,18 +19,21 @@ export function FinalCTA() {
             href={PROGRAMA_URL}
             target="_blank"
             rel="noopener"
+            onClick={trackClick("final_programa")}
             className="group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-[0_10px_30px_-10px_oklch(0.78_0.16_152/0.55)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/90"
           >
-            Conocer el Programa
+            Empezar hoy — $37
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </a>
           <a
             href="#guia-gratis"
+            onClick={trackClick("final_guia")}
             className="inline-flex items-center justify-center rounded-full border border-border bg-transparent px-5 py-3 text-sm font-medium text-muted-foreground transition hover:border-foreground/30 hover:text-foreground"
           >
             Descargar guía gratis
           </a>
         </div>
+
 
         <div
           id="guia-gratis"
