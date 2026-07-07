@@ -34,7 +34,7 @@ const faqs = [
   },
   {
     q: "¿Qué pasa si no sé nada sobre inversiones?",
-    a: "Es completamente normal. La guía gratuita te muestra cómo abrir tu cuenta paso a paso. Los fundamentos para invertir con estrategia los cubrimos dentro del Programa Portafolio Funcional.",
+    a: "Es completamente normal. La guía gratuita te muestra cómo abrir tu cuenta paso a paso. Los fundamentos para invertir con estrategia los cubrimos dentro del Programa de Portafolio Funcional.",
   },
   {
     q: "¿Necesito ser experto para invertir?",

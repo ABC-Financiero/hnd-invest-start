@@ -13,7 +13,7 @@ export function About() {
           A través de ABC Financiero he acompañado a más de <span className="text-foreground">1,000 personas</span> a entender cómo funciona el mercado y a empezar a invertir con criterio.
         </p>
         <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground sm:text-base">
-          El <span className="text-foreground">Programa Portafolio Funcional</span> contiene el mismo sistema de inversión con el que enseño a principiantes a construir un portafolio simple, diversificado y pensado para el largo plazo.
+          El <span className="text-foreground">Programa de Portafolio Funcional</span> contiene el mismo sistema de inversión con el que enseño a principiantes a construir un portafolio simple, diversificado y pensado para el largo plazo.
         </p>
       </div>
     </section>
