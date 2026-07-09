@@ -37,7 +37,7 @@ export function ChoosePath() {
                 onClick={trackClick("choose_programa")}
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-5 py-2.5 text-sm font-semibold text-primary transition hover:bg-primary/20"
               >
-                Ver el Programa — $37
+                Ver el Programa
               </a>
             </div>
           </div>
@@ -62,7 +62,7 @@ export function ChoosePath() {
               onClick={trackClick("choose_plan")}
               className="group mt-8 inline-flex w-fit items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/90"
             >
-              Quiero mi plan · $150
+              Quiero mi plan personalizado
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </a>
           </div>
