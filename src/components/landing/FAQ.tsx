@@ -13,52 +13,24 @@ const faqs = [
     a: "No, y desconfía de quien lo haga. Te enseño a invertir con un sistema basado en datos históricos y diversificación, no en promesas.",
   },
   {
-    q: "¿Necesito mucho dinero para empezar?",
-    a: "No. El sistema está diseñado para empezar desde montos pequeños mensuales, en lempiras, desde Honduras.",
-  },
-  {
-    q: "¿Qué plataforma se usa?",
-    a: "Hapi, un broker disponible en Honduras. La guía gratuita te enseña a abrir tu cuenta paso a paso.",
-  },
-  {
     q: "¿La bolsa de valores es una estafa?",
-    a: "No. La bolsa de valores es un mercado regulado donde millones de personas y empresas invierten todos los días. El problema no suele ser la bolsa, sino invertir sin estrategia, seguir consejos al azar o caer en promesas falsas de dinero rápido.",
+    a: "No. Es un mercado regulado donde millones de personas y empresas invierten todos los días. El problema no suele ser la bolsa, sino invertir sin estrategia o caer en promesas de dinero rápido.",
   },
   {
     q: "¿Necesito mucho dinero para empezar?",
-    a: "No. Hoy en día existen plataformas que permiten empezar desde montos bajos. Lo más importante al inicio no es cuánto dinero tienes, sino empezar con criterio y desarrollar el hábito de invertir.",
+    a: "No. Hoy existen plataformas que permiten empezar desde montos bajos. Lo importante al inicio no es cuánto tienes, sino empezar con criterio y desarrollar el hábito de invertir.",
   },
   {
     q: "¿Puedo perder dinero?",
-    a: "Sí, invertir tiene riesgo real y es importante entenderlo desde el principio. El valor de las inversiones puede subir o bajar. Por eso es importante invertir con un horizonte de largo plazo, conocer tu perfil de inversor y no invertir dinero que necesitas para emergencias.",
-  },
-  {
-    q: "¿Qué pasa si no sé nada sobre inversiones?",
-    a: "Es completamente normal. La guía gratuita te muestra cómo abrir tu cuenta paso a paso. Los fundamentos para invertir con estrategia los cubrimos dentro del Programa de Portafolio Funcional.",
+    a: "Sí, invertir tiene riesgo real. El valor de las inversiones puede subir o bajar. Por eso es clave invertir con un horizonte de largo plazo y no usar dinero que necesitas para emergencias.",
   },
   {
     q: "¿Necesito ser experto para invertir?",
-    a: "No. No necesitas ser experto para empezar. Lo importante es entender las bases, evitar errores comunes y construir una estrategia simple antes de tomar decisiones.",
-  },
-  {
-    q: "¿Por qué usas Hapi como ejemplo?",
-    a: "Hapi es una de las opciones más simples y accesibles para personas en Latinoamérica que quieren empezar a invertir en bolsa desde su celular. Por eso la guía gratuita te muestra cómo abrir tu cuenta específicamente en Hapi.",
-  },
-  {
-    q: "¿Esto garantiza que voy a ganar dinero?",
-    a: "No. Nadie puede garantizar ganancias en la bolsa de valores. El objetivo es ayudarte a empezar bien, reducir errores y aprender a invertir con más criterio.",
-  },
-  {
-    q: "¿Qué pasa si el mercado cae?",
-    a: "Las caídas forman parte normal de la bolsa de valores. Por eso es importante tener una estrategia, entender tu perfil de inversor y pensar en el largo plazo en lugar de reaccionar por miedo.",
+    a: "No. Lo importante es entender las bases, evitar errores comunes y construir una estrategia simple antes de tomar decisiones.",
   },
   {
     q: "¿Esto funciona para personas en Honduras?",
-    a: "Sí. Todo el contenido fue pensado específicamente para hondureños que quieren empezar desde cero y entender cómo abrir su cuenta e invertir desde Honduras.",
-  },
-  {
-    q: "¿Qué hago después de abrir mi cuenta?",
-    a: "Abrir tu cuenta es solo el primer paso. Después viene lo más importante: aprender a construir un portafolio según tu perfil de inversor, desarrollar el hábito de invertir y evitar tomar decisiones por emoción.",
+    a: "Sí. Todo el contenido está pensado para hondureños que quieren empezar desde cero y aprender a invertir desde Honduras.",
   },
 ];
 
@@ -70,7 +42,7 @@ export function FAQ() {
           Preguntas frecuentes antes de empezar
         </h2>
         <p className="mx-auto mt-4 max-w-[600px] text-center text-base text-muted-foreground sm:text-lg">
-          Estas son algunas dudas comunes que tienen muchos hondureños antes de invertir por primera vez.
+          Las dudas más comunes de quienes están por invertir por primera vez.
         </p>
         <Accordion type="single" collapsible className="mt-12 flex w-full flex-col gap-3">
           {faqs.map((f, i) => (

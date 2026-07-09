@@ -6,7 +6,7 @@ import { ProgramaSection } from "@/components/landing/ProgramaSection";
 import { StoryQuote } from "@/components/landing/StoryQuote";
 import { Results } from "@/components/landing/Results";
 import { TrustData } from "@/components/landing/TrustData";
-import { About } from "@/components/landing/About";
+
 import { Testimonials } from "@/components/landing/Testimonials";
 import { FAQ } from "@/components/landing/FAQ";
 import { FinalCTA } from "@/components/landing/FinalCTA";
@@ -30,7 +30,7 @@ export default function Index() {
       <StoryQuote />
       <Results />
       <TrustData />
-      <About />
+      
       <Testimonials />
       <FAQ />
       <FinalCTA />
