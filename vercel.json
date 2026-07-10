@@ -4,6 +4,7 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "rewrites": [
-    { "source": "/((?!api/).*)", "destination": "/index.html" }
+    { "source": "/__l5e/:path*", "destination": "https://id-preview--648b7e92-2b23-438e-8e5d-348f7f0ae042.lovable.app/__l5e/:path*" },
+    { "source": "/((?!api/|__l5e/).*)", "destination": "/index.html" }
   ]
 }
