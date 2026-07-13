@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Area,
   AreaChart,
@@ -53,7 +54,29 @@ const stats = [
   { value: "$10", label: "mínimo para empezar" },
 ];
 
+function ChevronIcon({ open }: { open: boolean }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={`shrink-0 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+      aria-hidden="true"
+    >
+      <path d="m6 9 6 6 6-6" />
+    </svg>
+  );
+}
+
 export function TrustData() {
+  const [open, setOpen] = useState(false);
+
   return (
     <section className="px-6 py-16 md:py-24">
       <div className="mx-auto max-w-[1080px]">
@@ -61,61 +84,83 @@ export function TrustData() {
           ¿Qué rendimiento puedes obtener en la bolsa de valores?
         </h2>
 
-        <div className="mt-10 rounded-3xl border border-border bg-card p-5 sm:p-7">
-          <div className="h-[260px] w-full sm:h-[340px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart
-                data={data}
-                margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
-              >
-                <defs>
-                  <linearGradient id="sp500" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="oklch(0.78 0.16 152)" stopOpacity={0.35} />
-                    <stop offset="100%" stopColor="oklch(0.78 0.16 152)" stopOpacity={0} />
-                  </linearGradient>
-                </defs>
-                <XAxis
-                  dataKey="year"
-                  stroke="oklch(0.6 0 0)"
-                  tick={{ fontSize: 11 }}
-                  tickLine={false}
-                  axisLine={false}
-                  interval={4}
-                />
-                <YAxis
-                  stroke="oklch(0.6 0 0)"
-                  tick={{ fontSize: 11 }}
-                  tickLine={false}
-                  axisLine={false}
-                  width={60}
-                  tickFormatter={(v: number) =>
-                    `$${v.toLocaleString("en-US")}`
-                  }
-                />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: "oklch(0.22 0 0)",
-                    border: "1px solid oklch(1 0 0 / 0.1)",
-                    borderRadius: 12,
-                    fontSize: 12,
-                    color: "#fff",
-                  }}
-                  labelStyle={{ color: "oklch(0.7 0 0)" }}
-                  formatter={(v: number) => [currency(v), "S&P 500"]}
-                />
-                <Area
-                  type="monotone"
-                  dataKey="value"
-                  stroke="oklch(0.78 0.16 152)"
-                  strokeWidth={2}
-                  fill="url(#sp500)"
-                />
-              </AreaChart>
-            </ResponsiveContainer>
+        <div className="mt-10 overflow-hidden rounded-3xl border border-border bg-card">
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition-colors hover:bg-muted/30 sm:px-7 sm:py-5"
+          >
+            <span className="text-sm font-semibold text-foreground sm:text-base">
+              {open ? "Ocultar histórico del S&P 500" : "Ver histórico del S&P 500"}
+            </span>
+            <span className="text-muted-foreground">
+              <ChevronIcon open={open} />
+            </span>
+          </button>
+
+          <div
+            className={`overflow-hidden transition-[max-height] duration-500 ease-in-out ${
+              open ? "max-h-[520px]" : "max-h-0"
+            }`}
+          >
+            <div className="px-5 pb-5 sm:px-7 sm:pb-7">
+              <div className="h-[260px] w-full sm:h-[340px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <AreaChart
+                    data={data}
+                    margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
+                  >
+                    <defs>
+                      <linearGradient id="sp500" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="oklch(0.78 0.16 152)" stopOpacity={0.35} />
+                        <stop offset="100%" stopColor="oklch(0.78 0.16 152)" stopOpacity={0} />
+                      </linearGradient>
+                    </defs>
+                    <XAxis
+                      dataKey="year"
+                      stroke="oklch(0.6 0 0)"
+                      tick={{ fontSize: 11 }}
+                      tickLine={false}
+                      axisLine={false}
+                      interval={4}
+                    />
+                    <YAxis
+                      stroke="oklch(0.6 0 0)"
+                      tick={{ fontSize: 11 }}
+                      tickLine={false}
+                      axisLine={false}
+                      width={60}
+                      tickFormatter={(v: number) =>
+                        `$${v.toLocaleString("en-US")}`
+                      }
+                    />
+                    <Tooltip
+                      contentStyle={{
+                        backgroundColor: "oklch(0.22 0 0)",
+                        border: "1px solid oklch(1 0 0 / 0.1)",
+                        borderRadius: 12,
+                        fontSize: 12,
+                        color: "#fff",
+                      }}
+                      labelStyle={{ color: "oklch(0.7 0 0)" }}
+                      formatter={(v: number) => [currency(v), "S&P 500"]}
+                    />
+                    <Area
+                      type="monotone"
+                      dataKey="value"
+                      stroke="oklch(0.78 0.16 152)"
+                      strokeWidth={2}
+                      fill="url(#sp500)"
+                    />
+                  </AreaChart>
+                </ResponsiveContainer>
+              </div>
+              <p className="mt-4 text-xs text-muted-foreground">
+                S&P 500 1995–2026 · Drawdown −38% en 2008. Rentabilidad pasada, no garantía futura.
+              </p>
+            </div>
           </div>
-          <p className="mt-4 text-xs text-muted-foreground">
-            S&P 500 1995–2026 · Drawdown −38% en 2008. Rentabilidad pasada, no garantía futura.
-          </p>
         </div>
 
         <div className="mt-10 grid grid-cols-2 gap-5 md:grid-cols-4">
