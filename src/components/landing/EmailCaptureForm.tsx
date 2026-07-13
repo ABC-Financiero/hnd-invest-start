@@ -11,7 +11,7 @@ const emailSchema = z
 type Status = "idle" | "loading" | "error";
 
 export function EmailCaptureForm({
-  ctaLabel = "Enviarme la guía",
+  ctaLabel = "Quiero la guía gratis",
 }: {
   ctaLabel?: string;
   variant?: "dark" | "outline";

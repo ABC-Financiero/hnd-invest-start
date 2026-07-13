@@ -1,11 +1,20 @@
+import { EmailCaptureForm } from "./EmailCaptureForm";
+
 export function Footer() {
   return (
     <footer
       id="footer-cta"
-      className="border-t border-border bg-[oklch(0.14_0_0)] px-6 pt-12 pb-10"
+      className="border-t border-border bg-[oklch(0.14_0_0)] px-6 pt-16 pb-10 md:pt-24"
     >
       <div className="mx-auto max-w-[680px] text-center">
-        <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
+        <h2 className="text-[26px] font-extrabold leading-tight tracking-[-0.02em] text-foreground sm:text-[34px] md:text-[40px]">
+          Empieza hoy lo que llevas años posponiendo.
+        </h2>
+        <div className="mt-8 flex justify-center">
+          <EmailCaptureForm />
+        </div>
+
+        <div className="mt-12 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
           <a
             href="https://www.tiktok.com/@ricardoaraque"
             target="_blank"
@@ -21,14 +30,6 @@ export function Footer() {
             className="hover:text-foreground"
           >
             Instagram @ricardoaraquen
-          </a>
-          <a
-            href="https://wa.me/50487328488"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-foreground"
-          >
-            WhatsApp +504 8732 8488
           </a>
         </div>
 

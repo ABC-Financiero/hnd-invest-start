@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { ChevronDown } from "lucide-react";
 import {
   Area,
   AreaChart,
@@ -56,89 +54,69 @@ const stats = [
 ];
 
 export function TrustData() {
-  const [open, setOpen] = useState(false);
-
   return (
     <section className="px-6 py-16 md:py-24">
       <div className="mx-auto max-w-[1080px]">
-        <div className="mx-auto max-w-[720px] text-center">
-          <h2 className="text-[26px] font-extrabold leading-tight tracking-[-0.02em] text-foreground sm:text-[34px] md:text-[40px]">
-            ¿Qué rendimiento puedes obtener en la bolsa de valores?
-          </h2>
-          <p className="mt-4 text-[15px] text-muted-foreground sm:text-base">
-            Mira los datos históricos del S&P 500 desde 1995 hasta hoy.
-          </p>
-          <button
-            type="button"
-            onClick={() => setOpen((v) => !v)}
-            aria-expanded={open}
-            className="mt-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 text-sm font-semibold text-foreground transition hover:border-primary/40 hover:text-primary"
-          >
-            {open ? "Ocultar gráfico" : "Ver el gráfico"}
-            <ChevronDown
-              className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`}
-            />
-          </button>
-        </div>
+        <h2 className="mx-auto max-w-[720px] text-center text-[26px] font-extrabold leading-tight tracking-[-0.02em] text-foreground sm:text-[34px] md:text-[40px]">
+          ¿Qué rendimiento puedes obtener en la bolsa de valores?
+        </h2>
 
-        {open && (
-          <div className="mt-10 rounded-3xl border border-border bg-card p-5 sm:p-7">
-            <div className="h-[260px] w-full sm:h-[340px]">
-              <ResponsiveContainer width="100%" height="100%">
-                <AreaChart
-                  data={data}
-                  margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
-                >
-                  <defs>
-                    <linearGradient id="sp500" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="oklch(0.78 0.16 152)" stopOpacity={0.35} />
-                      <stop offset="100%" stopColor="oklch(0.78 0.16 152)" stopOpacity={0} />
-                    </linearGradient>
-                  </defs>
-                  <XAxis
-                    dataKey="year"
-                    stroke="oklch(0.6 0 0)"
-                    tick={{ fontSize: 11 }}
-                    tickLine={false}
-                    axisLine={false}
-                    interval={4}
-                  />
-                  <YAxis
-                    stroke="oklch(0.6 0 0)"
-                    tick={{ fontSize: 11 }}
-                    tickLine={false}
-                    axisLine={false}
-                    width={60}
-                    tickFormatter={(v: number) =>
-                      `$${v.toLocaleString("en-US")}`
-                    }
-                  />
-                  <Tooltip
-                    contentStyle={{
-                      backgroundColor: "oklch(0.22 0 0)",
-                      border: "1px solid oklch(1 0 0 / 0.1)",
-                      borderRadius: 12,
-                      fontSize: 12,
-                      color: "#fff",
-                    }}
-                    labelStyle={{ color: "oklch(0.7 0 0)" }}
-                    formatter={(v: number) => [currency(v), "S&P 500"]}
-                  />
-                  <Area
-                    type="monotone"
-                    dataKey="value"
-                    stroke="oklch(0.78 0.16 152)"
-                    strokeWidth={2}
-                    fill="url(#sp500)"
-                  />
-                </AreaChart>
-              </ResponsiveContainer>
-            </div>
-            <p className="mt-4 text-xs text-muted-foreground">
-              S&P 500 1995–2026 · Drawdown −38% en 2008. Rentabilidad pasada, no garantía futura.
-            </p>
+        <div className="mt-10 rounded-3xl border border-border bg-card p-5 sm:p-7">
+          <div className="h-[260px] w-full sm:h-[340px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart
+                data={data}
+                margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
+              >
+                <defs>
+                  <linearGradient id="sp500" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="oklch(0.78 0.16 152)" stopOpacity={0.35} />
+                    <stop offset="100%" stopColor="oklch(0.78 0.16 152)" stopOpacity={0} />
+                  </linearGradient>
+                </defs>
+                <XAxis
+                  dataKey="year"
+                  stroke="oklch(0.6 0 0)"
+                  tick={{ fontSize: 11 }}
+                  tickLine={false}
+                  axisLine={false}
+                  interval={4}
+                />
+                <YAxis
+                  stroke="oklch(0.6 0 0)"
+                  tick={{ fontSize: 11 }}
+                  tickLine={false}
+                  axisLine={false}
+                  width={60}
+                  tickFormatter={(v: number) =>
+                    `$${v.toLocaleString("en-US")}`
+                  }
+                />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "oklch(0.22 0 0)",
+                    border: "1px solid oklch(1 0 0 / 0.1)",
+                    borderRadius: 12,
+                    fontSize: 12,
+                    color: "#fff",
+                  }}
+                  labelStyle={{ color: "oklch(0.7 0 0)" }}
+                  formatter={(v: number) => [currency(v), "S&P 500"]}
+                />
+                <Area
+                  type="monotone"
+                  dataKey="value"
+                  stroke="oklch(0.78 0.16 152)"
+                  strokeWidth={2}
+                  fill="url(#sp500)"
+                />
+              </AreaChart>
+            </ResponsiveContainer>
           </div>
-        )}
+          <p className="mt-4 text-xs text-muted-foreground">
+            S&P 500 1995–2026 · Drawdown −38% en 2008. Rentabilidad pasada, no garantía futura.
+          </p>
+        </div>
 
         <div className="mt-10 grid grid-cols-2 gap-5 md:grid-cols-4">
           {stats.map((s) => (

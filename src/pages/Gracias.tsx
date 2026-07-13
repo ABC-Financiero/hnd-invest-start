@@ -24,7 +24,7 @@ export default function Gracias() {
           Listo, revisa tu correo.
         </h1>
         <p className="mt-5 text-base text-muted-foreground sm:text-lg">
-          Te enviamos la guía paso a paso para abrir tu cuenta de inversión. Si no la ves en unos minutos, revisa la carpeta de spam o promociones.
+          Te enviamos la guía a tu correo. Si no la ves en unos minutos, revisa la carpeta de spam o promociones.
         </p>
         <Link
           to="/"
